@@ -106,12 +106,6 @@ function drawCupid(cx, cy) {
   push();
   translate(cx, cy);
 
-  // Halo
-  noFill();
-  stroke(255, 230, 100, 200);
-  strokeWeight(3);
-  ellipse(0, -46, 30, 10);
-
   noStroke();
 
   // Wings (behind body)
@@ -186,14 +180,44 @@ function drawCupid(cx, cy) {
   fill(255, 255, 255, 45);
   ellipse(2, -31, 4, 4);
 
-  // Little arms reaching outward
+  // Little arms
   fill(255, 205, 170);
-  // Left arm
-  ellipse(-20, 14, 11, 22);
-  // Right arm
-  ellipse(20, 14, 11, 22);
+  noStroke();
+  ellipse(-20, 14, 11, 22); // left arm (holds bow)
+  ellipse(20, 14, 11, 22);  // right arm (draws string)
+
+  // Bow (held on the left side)
+  stroke(140, 90, 30);
+  strokeWeight(3);
+  noFill();
+  beginShape();
+  vertex(-28, -22);
+  bezierVertex(-54, -10, -54, 22, -28, 32);
+  endShape();
+
+  // Bowstring
+  stroke(210, 190, 150);
+  strokeWeight(1.5);
+  line(-28, -22, -28, 32);
+
+  // Arrow shaft (notched against the string, pointing right)
+  stroke(140, 90, 30);
+  strokeWeight(2);
+  line(-26, 5, 24, 5);
+
+  // Arrowhead
+  noStroke();
+  fill(180, 180, 210);
+  triangle(24, 5, 15, 0, 15, 10);
+
+  // Arrow fletching (feathers at the tail)
+  fill(255, 220, 100);
+  triangle(-26, 5, -34, -2, -27, 4);
+  triangle(-26, 5, -34, 12, -27, 6);
 
   // Chubby legs/feet peeking below body
+  fill(255, 205, 170);
+  noStroke();
   ellipse(-9, 41, 13, 15);
   ellipse(9, 41, 13, 15);
 
@@ -234,11 +258,11 @@ class Particle {
     let dx = this.x - mouseX;
     let dy = this.y - mouseY;
     let distance = sqrt(dx * dx + dy * dy);
-    let radius = 100;
+    let radius = 160;
     if (distance < radius && distance > 0) {
       let force = (radius - distance) / radius;
-      this.vx += (dx / distance) * force * 2;
-      this.vy += (dy / distance) * force * 2;
+      this.vx += (dx / distance) * force * 4;
+      this.vy += (dy / distance) * force * 4;
     }
 
     this.x += this.vx;
