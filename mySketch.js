@@ -1,4 +1,5 @@
 // Modified from Daniel Shifman - codingtra.in
+// And then modified by Anastasia Salter.
 // Starter Option One: Particles
 //Things to try:
 // - Change the words - try phrases for more narrative / poetics!
@@ -162,19 +163,17 @@ function drawCupid(cx, cy) {
   ellipse(-4, -13, 8, 9);
 
   // === FACE FEATURES (profile, blowing expression) ===
-  // HUGE puffed cheek — very prominent, blowing hard
-  fill(255, 170, 148);
-  ellipse(24, -4, 40, 30);
-
   // Nose bump
   fill(240, 180, 145);
-  ellipse(22, -14, 10, 8);
+  ellipse(21, -13, 10, 8);
 
-  // Mouth — tight 'O' at the tip of the cheek puff
-  fill(200, 85, 90);
-  ellipse(25, -1, 10, 9);
-  fill(150, 50, 60);
-  ellipse(25, -1, 5, 5);
+  // Prominent lips — full and pursed for blowing
+  fill(210, 90, 95);
+  ellipse(23, -4, 14, 8);   // upper lip
+  ellipse(23, 2, 14, 7);    // lower lip
+  // Lip highlight
+  fill(240, 140, 140, 160);
+  ellipse(22, -5, 7, 4);
 
   // Eye (closed from effort of blowing)
   stroke(100, 55, 20);
