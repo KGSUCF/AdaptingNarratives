@@ -89,8 +89,8 @@ function computeLayout() {
   leftSignCx  = leftSignX  + signW / 2;
   rightSignCx = rightSignX + signW / 2;
 
-  leftPoetX  = windowWidth  * 0.06;
-  rightPoetX = windowWidth  * 0.94;
+  leftPoetX  = windowWidth  * 0.08;
+  rightPoetX = windowWidth  * 0.92;
   poetFootY  = windowHeight * 0.92;
   poetScale  = windowHeight / 700;
 
@@ -133,9 +133,12 @@ function drawDuelingScreen() {
   textSize(18);
   text("which speaks to your soul?", vsX, signTopY - 30);
 
-  fill(255, 255, 255, 120);
+  fill(255, 255, 200, 210);
   textSize(16);
   text("round " + round + " / " + MAX_ROUNDS, vsX, signTopY - 8);
+
+  // Live scores above each sign
+  drawScoreLabels();
 
   const leftHover  = isInPanel(leftSignX,  signTopY, signW, signH);
   const rightHover = isInPanel(rightSignX, signTopY, signW, signH);
@@ -152,9 +155,12 @@ function drawDuelingScreen() {
 // ── Voted screen ──────────────────────────────────────────────────────────────
 function drawVotedScreen() {
   noStroke();
-  fill(255, 255, 255, 120);
+  fill(255, 255, 200, 210);
   textSize(16);
   text("round " + round + " / " + MAX_ROUNDS, vsX, signTopY - 8);
+
+  // Live scores above each sign
+  drawScoreLabels();
 
   const leftState  = winnerSide === "left"  ? "winner" : "loser";
   const rightState = winnerSide === "right" ? "winner" : "loser";
@@ -193,6 +199,18 @@ function drawResultsScreen() {
   fill(255, 255, 255, 100 + 55 * sin(frameCount * 0.05));
   textSize(15);
   text("click to duel again", windowWidth / 2, windowHeight / 2 + 100);
+}
+
+// ── Score labels above each sign ─────────────────────────────────────────────
+function drawScoreLabels() {
+  noStroke();
+  textSize(15);
+  // Left score — warm red tint to match left poet
+  fill(255, 160, 140, 220);
+  text(leftWins + (leftWins === 1 ? " win" : " wins"), leftSignCx, signTopY - 8);
+  // Right score — blue tint to match right poet
+  fill(140, 180, 255, 220);
+  text(rightWins + (rightWins === 1 ? " win" : " wins"), rightSignCx, signTopY - 8);
 }
 
 // ── Scene: sign + arm + poet ──────────────────────────────────────────────────
