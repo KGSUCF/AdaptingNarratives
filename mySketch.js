@@ -114,97 +114,131 @@ function drawCupid(cx, cy) {
   push();
   translate(cx, cy);
 
-  // Flip horizontally to face the direction of movement
+  // Flip to face the direction of movement
   if (!facingRight) scale(-1, 1);
 
-  // Scale up overall size
+  // Scale up
   scale(1.5);
 
-  // === SILHOUETTE BODY ===
-  // Drawn as a solid dark shape; subtle warm stroke gives edge definition
-  // against the dark purple background
-  fill(14, 6, 28);
-  stroke(85, 50, 130, 140);
-  strokeWeight(3);
-
-  // Back wing
-  beginShape();
-  vertex(2, -5);
-  bezierVertex(30, -48, 80, -28, 58, 14);
-  bezierVertex(38, 38, 8, 18, 2, -5);
-  endShape(CLOSE);
-
-  // Front wing
-  beginShape();
-  vertex(-2, -5);
-  bezierVertex(-30, -48, -80, -28, -58, 14);
-  bezierVertex(-38, 38, -8, 18, -2, -5);
-  endShape(CLOSE);
-
-  // Body
-  ellipse(0, 22, 34, 40);
-
-  // Head
-  ellipse(0, -10, 36, 36);
-
-  // Curly hair bumps across the top
-  for (let i = -2; i <= 2; i++) {
-    ellipse(i * 6, -29, 14, 13);
-  }
-  ellipse(-19, -16, 11, 11);
-  ellipse(19, -16, 11, 11);
-
-  // Massive puffed cheek on the right (blowing hard)
-  ellipse(22, -5, 40, 30);
-
-  // Arms
-  ellipse(-20, 14, 11, 22);
-  ellipse(20, 14, 11, 22);
-
-  // Legs
-  ellipse(-9, 41, 13, 15);
-  ellipse(9, 41, 13, 15);
-
-  // Air puffs bursting from the cheek — bright white so they pop
-  noStroke();
-  fill(255, 255, 255, 140);
-  ellipse(36, -5, 13, 13);
-  fill(255, 255, 255, 100);
-  ellipse(48, -9, 10, 10);
-  fill(255, 255, 255, 65);
-  ellipse(58, -14, 8, 8);
-  fill(255, 255, 255, 35);
-  ellipse(66, -19, 6, 6);
-
-  // === BOW AND ARROW — drawn last so they sit in front of the body ===
-  // Bow on the left side (the side visible from the viewer's angle)
-  stroke(210, 165, 70);
-  strokeWeight(2);
-  noFill();
-  beginShape();
-  vertex(-32, -26);
-  bezierVertex(-62, -12, -62, 26, -32, 38);
-  endShape();
-
-  // Bowstring
-  stroke(230, 215, 170);
+  // === WING (on the back — drawn first so body covers the root) ===
+  fill(215, 235, 255, 210);
+  stroke(190, 215, 255, 160);
   strokeWeight(1);
-  line(-32, -26, -32, 38);
-
-  // Arrow shaft crossing the body horizontally
-  stroke(210, 165, 70);
-  strokeWeight(1.5);
-  line(-30, 6, 30, 6);
-
-  // Arrowhead (silvery)
+  beginShape();
+  vertex(-8, 2);
+  bezierVertex(-26, -44, -68, -20, -50, 14);
+  bezierVertex(-32, 36, -10, 16, -8, 2);
+  endShape(CLOSE);
+  // Wing shimmer
+  fill(255, 255, 255, 75);
   noStroke();
-  fill(190, 200, 230);
-  triangle(30, 6, 20, 0, 20, 12);
+  beginShape();
+  vertex(-10, 2);
+  bezierVertex(-20, -30, -48, -14, -36, 8);
+  bezierVertex(-24, 20, -12, 10, -10, 2);
+  endShape(CLOSE);
 
-  // Arrow fletching at the tail
-  fill(245, 215, 85);
-  triangle(-30, 6, -42, -2, -31, 5);
-  triangle(-30, 6, -42, 14, -31, 7);
+  noStroke();
+
+  // === BODY (side profile — chubby baby torso) ===
+  fill(255, 205, 165);
+  ellipse(-2, 18, 28, 38);
+  // Belly bump (front/right side)
+  ellipse(7, 22, 16, 14);
+
+  // === HEAD (side profile, facing right) ===
+  fill(255, 210, 170);
+  ellipse(5, -14, 33, 31);
+
+  // === HAIR (curly, on top and back of head) ===
+  fill(225, 175, 65);
+  ellipse(-5, -30, 16, 14);
+  ellipse(3, -32, 16, 14);
+  ellipse(11, -30, 14, 13);
+  ellipse(-13, -20, 13, 12);
+
+  // Ear (small profile ear)
+  fill(245, 190, 155);
+  ellipse(-4, -13, 8, 9);
+
+  // === FACE FEATURES (profile, blowing expression) ===
+  // HUGE puffed cheek — very prominent, blowing hard
+  fill(255, 170, 148);
+  ellipse(24, -4, 40, 30);
+
+  // Nose bump
+  fill(240, 180, 145);
+  ellipse(22, -14, 10, 8);
+
+  // Mouth — tight 'O' at the tip of the cheek puff
+  fill(200, 85, 90);
+  ellipse(25, -1, 10, 9);
+  fill(150, 50, 60);
+  ellipse(25, -1, 5, 5);
+
+  // Eye (closed from effort of blowing)
+  stroke(100, 55, 20);
+  strokeWeight(1.5);
+  noFill();
+  arc(15, -19, 10, 6, PI + 0.2, TWO_PI - 0.2);
+
+  // Eyebrow (raised with effort)
+  arc(15, -24, 14, 6, PI + 0.5, TWO_PI - 0.5);
+  noStroke();
+
+  // === ARMS ===
+  fill(255, 205, 165);
+  // Forward arm extending toward bow
+  ellipse(13, 4, 12, 20);
+  ellipse(21, 2, 10, 16);
+  // Back arm (drawing string, near cheek)
+  fill(245, 195, 158);
+  ellipse(8, -3, 9, 16);
+
+  // === LEGS ===
+  fill(255, 205, 165);
+  ellipse(-5, 38, 14, 16);
+  ellipse(5, 40, 12, 15);
+
+  // === BOW (in FRONT — drawn on top of body) ===
+  // D-shape bow: curve faces forward (right), opening faces back (toward Cupid).
+  // arc(x, y, w, h, -HALF_PI, HALF_PI) draws the right semicircle.
+  // Endpoints: top (32, -24) and bottom (32, 34). Rightmost tip: (51, 5).
+  stroke(155, 98, 28);
+  strokeWeight(2.5);
+  noFill();
+  arc(32, 5, 38, 58, -HALF_PI, HALF_PI);
+
+  // Bowstring — connects the two arc endpoints on the left (Cupid's) side
+  stroke(225, 205, 160);
+  strokeWeight(1);
+  line(32, -24, 32, 34);
+
+  // === ARROW (nock near string, tip pointing forward/right) ===
+  // Shaft runs from behind the string (nock end) to beyond the bow (tip end).
+  stroke(155, 98, 28);
+  strokeWeight(1.5);
+  line(24, 5, 64, 5);
+
+  // Arrowhead at the tip (rightmost, pointing forward)
+  noStroke();
+  fill(185, 195, 225);
+  triangle(64, 5, 54, 0, 54, 10);
+
+  // Fletching at the nock end (left of string)
+  fill(245, 215, 80);
+  triangle(24, 5, 14, -1, 23, 4);
+  triangle(24, 5, 14, 11, 23, 6);
+
+  // === AIR PUFFS from mouth (blowing forward) ===
+  fill(255, 255, 255, 130);
+  ellipse(40, -2, 13, 13);
+  fill(255, 255, 255, 95);
+  ellipse(52, -6, 10, 10);
+  fill(255, 255, 255, 62);
+  ellipse(62, -10, 8, 8);
+  fill(255, 255, 255, 35);
+  ellipse(70, -14, 6, 6);
 
   pop();
 }
