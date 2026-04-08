@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adapting Narratives</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #1D075D;
+      color: #fff;
+      font-family: Georgia, serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #ffffc8;
+      letter-spacing: 0.05em;
+      text-align: center;
+      margin-bottom: 0.4rem;
+    }
+
+    .subtitle {
+      color: rgba(255,255,255,0.5);
+      font-size: 1rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      font-style: italic;
+    }
+
+    .cards {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    a.card {
+      display: block;
+      width: 220px;
+      padding: 2rem 1.5rem;
+      border: 1px solid rgba(255,255,200,0.25);
+      border-radius: 10px;
+      background: rgba(255,255,200,0.05);
+      text-decoration: none;
+      color: #fff;
+      text-align: center;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    }
+
+    a.card:hover {
+      background: rgba(255,255,200,0.12);
+      border-color: rgba(255,255,200,0.6);
+      transform: translateY(-3px);
+    }
+
+    a.card h2 {
+      font-size: 1.3rem;
+      color: #ffffc8;
+      margin-bottom: 0.6rem;
+    }
+
+    a.card p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.5;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <h1>Adapting Narratives</h1>
+  <p class="subtitle">interactive p5.js experiments</p>
+
+  <div class="cards">
+    <a class="card" href="HaikuDuel.html">
+      <h2>Haiku Duel</h2>
+      <p>Two nonsensical haikus enter. One haiku wins. Vote for your favorite over ten rounds.</p>
+    </a>
+
+    <a class="card" href="breathing.html">
+      <h2>Breathing</h2>
+      <p>Feather-words drift down while Cupid blows them away. A particle poem.</p>
+    </a>
+
+    <a class="card" href="RoughSailing.html">
+      <h2>Rough Sailing</h2>
+      <p>A small boat rides procedural waves through a stormy, noisy sea.</p>
+    </a>
+  </div>
+</body>
+</html>
