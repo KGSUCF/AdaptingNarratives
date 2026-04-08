@@ -17,6 +17,9 @@ let gameState = "title";
 let rainAmount = 3;
 let rainTarget = 3;
 let rainTimer = 0;
+// Cupid direction tracking
+let prevMouseX = 0;
+let facingRight = true;
 
 function setup() {
 	//This creates a canvas the size of the screen
@@ -51,6 +54,11 @@ function draw() {
       particles.splice(i, 1);
     }
   }
+
+  // Update facing direction based on horizontal mouse movement
+  if (mouseX > prevMouseX + 2) facingRight = true;
+  else if (mouseX < prevMouseX - 2) facingRight = false;
+  prevMouseX = mouseX;
 
   // Draw Cupid following the mouse
   drawCupid(mouseX, mouseY);
@@ -106,120 +114,97 @@ function drawCupid(cx, cy) {
   push();
   translate(cx, cy);
 
-  noStroke();
+  // Flip horizontally to face the direction of movement
+  if (!facingRight) scale(-1, 1);
 
-  // Wings (behind body)
-  // Left wing
-  fill(210, 230, 255, 190);
-  beginShape();
-  vertex(-2, -5);
-  bezierVertex(-30, -48, -80, -28, -58, 14);
-  bezierVertex(-38, 38, -8, 18, -2, -5);
-  endShape(CLOSE);
+  // Scale up overall size
+  scale(1.5);
 
-  // Right wing
+  // === SILHOUETTE BODY ===
+  // Drawn as a solid dark shape; subtle warm stroke gives edge definition
+  // against the dark purple background
+  fill(14, 6, 28);
+  stroke(85, 50, 130, 140);
+  strokeWeight(3);
+
+  // Back wing
   beginShape();
   vertex(2, -5);
   bezierVertex(30, -48, 80, -28, 58, 14);
   bezierVertex(38, 38, 8, 18, 2, -5);
   endShape(CLOSE);
 
-  // Wing shimmer highlights
-  fill(255, 255, 255, 70);
+  // Front wing
   beginShape();
-  vertex(-4, -5);
-  bezierVertex(-18, -36, -54, -20, -38, 6);
-  bezierVertex(-24, 22, -8, 10, -4, -5);
-  endShape(CLOSE);
-  beginShape();
-  vertex(4, -5);
-  bezierVertex(18, -36, 54, -20, 38, 6);
-  bezierVertex(24, 22, 8, 10, 4, -5);
+  vertex(-2, -5);
+  bezierVertex(-30, -48, -80, -28, -58, 14);
+  bezierVertex(-38, 38, -8, 18, -2, -5);
   endShape(CLOSE);
 
-  // Body (chubby cherub torso)
-  fill(255, 205, 170);
+  // Body
   ellipse(0, 22, 34, 40);
 
   // Head
   ellipse(0, -10, 36, 36);
 
-  // Curly hair
-  fill(225, 175, 70);
+  // Curly hair bumps across the top
   for (let i = -2; i <= 2; i++) {
     ellipse(i * 6, -29, 14, 13);
   }
   ellipse(-19, -16, 11, 11);
   ellipse(19, -16, 11, 11);
 
-  // Eyes closed (blowing expression)
-  stroke(80, 40, 20);
-  strokeWeight(1.5);
-  noFill();
-  arc(-9, -12, 9, 6, PI, TWO_PI);
-  arc(9, -12, 9, 6, PI, TWO_PI);
+  // Massive puffed cheek on the right (blowing hard)
+  ellipse(22, -5, 40, 30);
+
+  // Arms
+  ellipse(-20, 14, 11, 22);
+  ellipse(20, 14, 11, 22);
+
+  // Legs
+  ellipse(-9, 41, 13, 15);
+  ellipse(9, 41, 13, 15);
+
+  // Air puffs bursting from the cheek — bright white so they pop
   noStroke();
+  fill(255, 255, 255, 140);
+  ellipse(36, -5, 13, 13);
+  fill(255, 255, 255, 100);
+  ellipse(48, -9, 10, 10);
+  fill(255, 255, 255, 65);
+  ellipse(58, -14, 8, 8);
+  fill(255, 255, 255, 35);
+  ellipse(66, -19, 6, 6);
 
-  // Puffed cheeks
-  fill(255, 165, 155, 190);
-  ellipse(-13, -4, 16, 13);
-  ellipse(13, -4, 16, 13);
-
-  // Mouth open in an 'O', blowing
-  fill(200, 85, 90);
-  ellipse(0, -2, 8, 7);
-  // Inner mouth
-  fill(140, 50, 60);
-  ellipse(0, -2, 4, 4);
-
-  // Air puffs drifting upward from the mouth
-  fill(255, 255, 255, 110);
-  ellipse(1, -16, 6, 6);
-  fill(255, 255, 255, 75);
-  ellipse(-2, -24, 5, 5);
-  fill(255, 255, 255, 45);
-  ellipse(2, -31, 4, 4);
-
-  // Little arms
-  fill(255, 205, 170);
-  noStroke();
-  ellipse(-20, 14, 11, 22); // left arm (holds bow)
-  ellipse(20, 14, 11, 22);  // right arm (draws string)
-
-  // Bow (held on the left side)
-  stroke(140, 90, 30);
-  strokeWeight(3);
+  // === BOW AND ARROW — drawn last so they sit in front of the body ===
+  // Bow on the left side (the side visible from the viewer's angle)
+  stroke(210, 165, 70);
+  strokeWeight(2);
   noFill();
   beginShape();
-  vertex(-28, -22);
-  bezierVertex(-54, -10, -54, 22, -28, 32);
+  vertex(-32, -26);
+  bezierVertex(-62, -12, -62, 26, -32, 38);
   endShape();
 
   // Bowstring
-  stroke(210, 190, 150);
+  stroke(230, 215, 170);
+  strokeWeight(1);
+  line(-32, -26, -32, 38);
+
+  // Arrow shaft crossing the body horizontally
+  stroke(210, 165, 70);
   strokeWeight(1.5);
-  line(-28, -22, -28, 32);
+  line(-30, 6, 30, 6);
 
-  // Arrow shaft (notched against the string, pointing right)
-  stroke(140, 90, 30);
-  strokeWeight(2);
-  line(-26, 5, 24, 5);
-
-  // Arrowhead
+  // Arrowhead (silvery)
   noStroke();
-  fill(180, 180, 210);
-  triangle(24, 5, 15, 0, 15, 10);
+  fill(190, 200, 230);
+  triangle(30, 6, 20, 0, 20, 12);
 
-  // Arrow fletching (feathers at the tail)
-  fill(255, 220, 100);
-  triangle(-26, 5, -34, -2, -27, 4);
-  triangle(-26, 5, -34, 12, -27, 6);
-
-  // Chubby legs/feet peeking below body
-  fill(255, 205, 170);
-  noStroke();
-  ellipse(-9, 41, 13, 15);
-  ellipse(9, 41, 13, 15);
+  // Arrow fletching at the tail
+  fill(245, 215, 85);
+  triangle(-30, 6, -42, -2, -31, 5);
+  triangle(-30, 6, -42, 14, -31, 7);
 
   pop();
 }
