@@ -11,16 +11,25 @@ const rules = {
   line1: ["#adj2# #color1# #flower2#"],
   line2: ["#verb2# #adv2# #prep1# #article1# #noun1#"],
   line3: ["#adj3# #bird2#"],
-  adj2: ["silent","gentle","purple","silver","golden","restless","ancient","fragile","quiet","tender"],
-  color1: ["red","blue","pink","white","black","gold","tan","gray"],
-  flower2: ["roses","tulips","lilies","irises","poppies","lotuses","orchids","peonies","daffodils","pansies"],
-  verb2: ["wander","follow","glisten","flutter","drifting","dancing","settle","hover","tremble","rustle"],
-  adv2: ["slowly","softly","brightly","sweetly","calmly","warmly","boldly","lightly"],
+  adj2: ["silent","gentle","purple","silver","golden","restless","ancient","fragile","quiet","tender",
+         "lonely","hollow","bitter","misty","dusty","amber","frozen","broken","sullen","faded",
+         "velvet","mossy","humid","dreaming","sunlit","glowing","heavy","tangled","crimson","somber"],
+  color1: ["red","blue","pink","white","black","gold","tan","gray",
+           "green","brown","beige","rust","teal","cream","sage","blush","slate","bone","jade","mauve"],
+  flower2: ["roses","tulips","lilies","irises","poppies","lotuses","orchids","peonies","daffodils","pansies",
+            "asters","foxgloves","thistles","clover","lupins"],
+  verb2: ["wander","follow","glisten","flutter","drifting","dance","settle","hover","tremble","rustle",
+          "whisper","stumble","shimmer","linger","scatter"],
+  adv2: ["slowly","softly","brightly","sweetly","calmly","warmly","boldly","lightly",
+         "gently","deeply","wildly","dimly","keenly","freely","sharply"],
   prep1: ["through","past","near","by","from","toward","round"],
   article1: ["a","the"],
-  noun1: ["pond","tree","stone","breeze","leaf","path","cloud","field"],
-  adj3: ["melodious","mysterious","luminous","delicate","beautiful","radiant","colorful","harmonious"],
-  bird2: ["robin","sparrow","bluejay","heron","falcon","parrot","raven","swallow","thrush","pigeon"]
+  noun1: ["pond","tree","stone","breeze","leaf","path","cloud","field",
+          "stream","hill","bridge","moss","wave","door","shore"],
+  adj3: ["melodious","mysterious","luminous","delicate","beautiful","radiant","colorful","harmonious",
+         "silvery","sorrowful","wandering","thunderous"],
+  bird2: ["robin","sparrow","bluejay","heron","falcon","parrot","raven","swallow","thrush","pigeon",
+          "starling","warbler","magpie","puffin","osprey","plover","kestrel","curlew","lapwing","ibis"]
 };
 
 function flatten(text) {
