@@ -35,6 +35,7 @@ function draw() {
     background(240, 230, 210);
 	 drawCloud();
 	drawCloud2();
+    drawTreeLine();
     drawFuji();
 	drawBigWave();
 	 let seaLevel = height * 0.6; 
@@ -120,12 +121,44 @@ function drawBoat(x, y) {
     push();
     translate(x, y);
     // Slight rocking motion based on the noise
-    rotate(sin(frameCount * 0.05) * 0.1); 
-    
+    rotate(sin(frameCount * 0.05) * 0.1);
+
     noStroke();
-	 fill(150, 80, 20); // Dark wood color
+    fill(150, 80, 20); // Dark wood color
     // Simple boat hull
-    arc(0, -5, 180, 50, 0, PI, CHORD); 
+    arc(0, -5, 180, 50, 0, PI, CHORD);
+
+    // Mast
+    stroke(100, 60, 10);
+    strokeWeight(3);
+    line(-20, -5, -20, -90);
+
+    // Triangular mainsail (bow on the left, boom extends right toward stern)
+    noStroke();
+    fill(255, 255, 255);
+    triangle(-20, -90, -20, -5, 70, -5);
+
+    pop();
+}
+
+function drawTreeLine() {
+    push();
+    fill(40, 95, 40);
+    noStroke();
+
+    let baseY = height * 0.51;
+    let avgTopY = height * 0.41;
+    let treeAmplitude = 22;
+    let treeFreq = 0.025;
+
+    beginShape();
+    vertex(0, baseY);
+    for (let x = 0; x <= width; x += 4) {
+        let n = simplexB.noise2D(x * treeFreq, 50); // y=50 is fixed, so no animation
+        vertex(x, avgTopY + n * treeAmplitude);
+    }
+    vertex(width, baseY);
+    endShape(CLOSE);
     pop();
 }
 
