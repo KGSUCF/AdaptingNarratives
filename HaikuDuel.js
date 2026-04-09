@@ -18,7 +18,7 @@ const rules = {
            "green","brown","beige","rust","teal","cream","sage","blush","slate","bone","jade","mauve"],
   flower2: ["roses","tulips","lilies","irises","poppies","lotuses","orchids","peonies","daffodils","pansies",
             "asters","foxgloves","thistles","clover","lupins"],
-  verb2: ["wander","follow","glisten","flutter","drifting","dance","settle","hover","tremble","rustle",
+  verb2: ["wander","follow","glisten","flutter","drifting","gambol","settle","hover","tremble","rustle",
           "whisper","stumble","shimmer","linger","scatter"],
   adv2: ["slowly","softly","brightly","sweetly","calmly","warmly","boldly","lightly",
          "gently","deeply","wildly","dimly","keenly","freely","sharply"],
